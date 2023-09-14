@@ -26,27 +26,5 @@ public class JpademoApplication {
 			}
 		};
 	}
-
-	// @Bean
-    // public Configuration freemarkerConfig() {
-    //     Configuration configuration = new Configuration(Configuration.VERSION_2_3_31);
-    //     configuration.setClassForTemplateLoading(this.getClass(), "/");
-    //     return configuration;
-    // }
-
-//	@Bean
-//	public CommandLineRunner demo(DetailRepository detailRepository) {
-//		return args -> {
-//			// Create a new Detail entity
-//			Detail detail = new Detail();
-////			// Set properties for the entity
-//			detailRepository.save(detail);
-////
-//			// Retrieve details from the database
-//			Detail retrievedDetail = detailRepository.findById(detail.getId()).orElse(null);
-//
-//			System.out.println("Retrieved Detail: " + retrievedDetail);
-//		};
-//	}
 }
 

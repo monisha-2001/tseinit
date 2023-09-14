@@ -2,6 +2,8 @@ package com.example.Jpademo.com.model;
 
 
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,13 +24,18 @@ public class Detail {
     private String springBootVersion;
     private String packaging;
     private String javaVersion;
+    private List dependencies;
     private String customDependencies;
 
 
     public Detail() {
     }
 
-    public Detail(ObjectId id, String groupId, String artifactId, String name, String description, String packageName, String buildType, String language, String springBootVersion, String packaging, String javaVersion, String customDependencies) {
+    
+    
+    public Detail(ObjectId id, String groupId, String artifactId, String name, String description, String packageName,
+            String buildType, String language, String springBootVersion, String packaging, String javaVersion,
+            List dependencies, String customDependencies) {
         this.id = id;
         this.groupId = groupId;
         this.artifactId = artifactId;
@@ -40,8 +47,11 @@ public class Detail {
         this.springBootVersion = springBootVersion;
         this.packaging = packaging;
         this.javaVersion = javaVersion;
+        this.dependencies = dependencies;
         this.customDependencies = customDependencies;
     }
+
+
 
     public ObjectId getId() {
         return id;
@@ -130,6 +140,14 @@ public class Detail {
     public void setJavaVersion(String javaVersion) {
         this.javaVersion = javaVersion;
     }
+    
+   public List getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List dependencies) {
+        this.dependencies = dependencies;
+    }
 
     public String getCustomDependencies() {
         return customDependencies;
@@ -153,7 +171,12 @@ public class Detail {
                 ", springBootVersion='" + springBootVersion + '\'' +
                 ", packaging='" + packaging + '\'' +
                 ", javaVersion='" + javaVersion + '\'' +
+                ", Dependencies='" + dependencies + '\'' +
                 ", customDependencies='" + customDependencies + '\'' +
                 '}';
     }
+
+
+
+    
 }
