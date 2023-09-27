@@ -19,8 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DetailController {
-
-
     private final DetailService detailService;
     private final ProjectGenerationService projectGenerationService;
     private final MongoTemplate mongoTemplate;
@@ -30,24 +28,28 @@ public class DetailController {
         this.detailService = detailService;
         this.projectGenerationService = projectGenerationService;
         this.mongoTemplate = mongoTemplate;
-
-
     }
 
     @PostMapping("/generate")
     public ResponseEntity<String> submitDetail(@RequestBody Detail detail,HttpServletResponse response) throws IOException{
-        Detail details = detailService.createDetail(detail);
+       try{
 
-        projectGenerationService.generateProject(details, response);
+           Detail details = detailService.createDetail(detail);
 
-        // Delete the previous data
-        mongoTemplate.dropCollection(Detail.class);
+           projectGenerationService.generateProject(details, response);
 
-        // Insert the new data
-        mongoTemplate.insert(details);
+           // Delete the previous data
+           mongoTemplate.dropCollection(Detail.class);
 
-        System.out.println(details);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Data saved successfully.");
+           // Insert the new data
+           mongoTemplate.insert(details);
+
+           System.out.println(details);
+           return ResponseEntity.status(HttpStatus.CREATED).body("Data saved successfully.");
+       }catch (Exception e) {
+           // Handle other exceptions and return a 500 Internal Server Error response
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+       }
     }
 
     @GetMapping("/details")
